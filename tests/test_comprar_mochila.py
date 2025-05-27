@@ -8,6 +8,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.actions import interaction
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
  
 def test_comprar():
     options = AppiumOptions()
@@ -27,14 +29,20 @@ def test_comprar():
     })
     
     driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
+    driver.implicitly_wait(1) # configura o tempo de espera implícito para 1 segundo
+    wait = WebDriverWait(driver, 1) # cria uma instância de espera explícita com timeout de 1 segundo
 
     lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
     lblSecao.click()
     imgMochila = driver.find_element(by=AppiumBy.XPATH, value="(//android.widget.ImageView[@content-desc=\"Product Image\"])[1]")
     imgMochila.click()
-    time.sleep(5)
+
+    # time.sleep(5)
     el3 = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
     el3.click()
+    # wait.until(EC.presence_of_element_located((
+    #     AppiumBy.ID, "com.saucelabs.mydemoapp.android:id/productTV"))).click()
+
     el4 = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
     el4.click()
     el5 = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Black color")
