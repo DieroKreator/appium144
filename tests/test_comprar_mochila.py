@@ -45,14 +45,17 @@ def test_comprar():
 
     lblNomeProduto = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
     assert lblNomeProduto.text == "Sauce Labs Backpack"
-    lblPrecoProduto = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Black color")
-    assert lblPrecoProduto.text == "$29.99"
-    sltCor = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/noTV")
+    lblPrecoProduto = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
+    assert lblPrecoProduto.text == "$ 29.99"
+    sltCor = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Black color")
     sltCor.click()
-    txtQuantidade = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Tap to add product to cart")
+    txtQuantidade = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/noTV")
     txtQuantidade.click()
-    el8 = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().className(\"android.widget.ImageView\").instance(3)")
-    el8.click()
+    btnAdicionarNoCarrinho = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Tap to add product to cart")
+    btnAdicionarNoCarrinho.click()
+    lblQuantidadeNoCarrinho = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().className(\"android.widget.ImageView\").instance(3)")
+    lblQuantidadeNoCarrinho.click()
+
     actions = ActionChains(driver)
     actions.w3c_actions = ActionBuilder(driver, mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
     actions.w3c_actions.pointer_action.move_to_location(530, 1944)
