@@ -33,7 +33,7 @@ def test_comprar():
     wait = WebDriverWait(driver, 1) # cria uma instância de espera explícita com timeout de 1 segundo
 
     lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
-    lblSecao.click()
+    assert lblSecao.text == "Products"
     imgMochila = driver.find_element(by=AppiumBy.XPATH, value="(//android.widget.ImageView[@content-desc=\"Product Image\"])[1]")
     imgMochila.click()
 
@@ -43,14 +43,14 @@ def test_comprar():
     # wait.until(EC.presence_of_element_located((
     #     AppiumBy.ID, "com.saucelabs.mydemoapp.android:id/productTV"))).click()
 
-    el4 = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
-    el4.click()
-    el5 = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Black color")
-    el5.click()
-    el6 = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/noTV")
-    el6.click()
-    el7 = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Tap to add product to cart")
-    el7.click()
+    lblNomeProduto = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
+    assert lblNomeProduto.text == "Sauce Labs Backpack"
+    lblPrecoProduto = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Black color")
+    assert lblPrecoProduto.text == "$29.99"
+    sltCor = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/noTV")
+    sltCor.click()
+    txtQuantidade = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Tap to add product to cart")
+    txtQuantidade.click()
     el8 = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().className(\"android.widget.ImageView\").instance(3)")
     el8.click()
     actions = ActionChains(driver)
