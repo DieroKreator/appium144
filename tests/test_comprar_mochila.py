@@ -28,10 +28,12 @@ def test_comprar():
         "appium:connectHardwareKeyboard": True
     })
     
+    # Inicia o Appium Server antes de executar este teste
     driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
     driver.implicitly_wait(1) # configura o tempo de espera implícito para 1 segundo
     wait = WebDriverWait(driver, 1) # cria uma instância de espera explícita com timeout de 1 segundo
 
+    # Blocos de código para interagir com o aplicativo
     lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
     assert lblSecao.text == "Products"
     imgMochila = driver.find_element(by=AppiumBy.XPATH, value="(//android.widget.ImageView[@content-desc=\"Product Image\"])[1]")
@@ -55,22 +57,6 @@ def test_comprar():
     btnAdicionarNoCarrinho.click()
     lblQuantidadeNoCarrinho = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().className(\"android.widget.ImageView\").instance(3)")
     lblQuantidadeNoCarrinho.click()
-
-    actions = ActionChains(driver)
-    actions.w3c_actions = ActionBuilder(driver, mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
-    actions.w3c_actions.pointer_action.move_to_location(530, 1944)
-    actions.w3c_actions.pointer_action.pointer_down()
-    actions.w3c_actions.pointer_action.pause(0.1)
-    actions.w3c_actions.pointer_action.release()
-    actions.perform()
-    
-    actions = ActionChains(driver)
-    actions.w3c_actions = ActionBuilder(driver, mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
-    actions.w3c_actions.pointer_action.move_to_location(545, 1224)
-    actions.w3c_actions.pointer_action.pointer_down()
-    actions.w3c_actions.pointer_action.pause(0.1)
-    actions.w3c_actions.pointer_action.release()
-    actions.perform()
     
     actions = ActionChains(driver)
     actions.w3c_actions = ActionBuilder(driver, mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
@@ -80,5 +66,5 @@ def test_comprar():
     actions.w3c_actions.pointer_action.release()
     actions.perform()
         
-        
+    # Destroir o driver após o teste
     driver.quit()
