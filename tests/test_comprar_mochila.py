@@ -30,8 +30,8 @@ def test_comprar():
     
     # Inicia o Appium Server antes de executar este teste
     driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
-    # driver.implicitly_wait(1) # configura o tempo de espera implícito para 1 segundo
-    # wait = WebDriverWait(driver, 1) # cria uma instância de espera explícita com timeout de 1 segundo
+    wait = WebDriverWait(driver, 1) # cria uma instância de espera explícita com timeout de 1 segundo
+    driver.implicitly_wait(1) # configura o tempo de espera implícito para 1 segundo
 
     # Blocos de código para interagir com o aplicativo
     lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
@@ -39,13 +39,13 @@ def test_comprar():
     imgMochila = driver.find_element(by=AppiumBy.XPATH, value="(//android.widget.ImageView[@content-desc=\"Product Image\"])[1]")
     imgMochila.click()
 
-    time.sleep(5)
-    el3 = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
-    el3.click()
-    # wait.until(EC.presence_of_element_located((
-    #     AppiumBy.ID, "com.saucelabs.mydemoapp.android:id/productTV"))).click()
+    # time.sleep(1)
+    # el3 = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
+    # el3.click()
+    wait.until(EC.presence_of_element_located((
+        AppiumBy.ID, "com.saucelabs.mydemoapp.android:id/productTV"))).click()
 
-    lblNomeProduto = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
+    lblNomeProduto = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
     assert lblNomeProduto.text == "Sauce Labs Backpack"
     lblPrecoProduto = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
     assert lblPrecoProduto.text == "$ 29.99"
