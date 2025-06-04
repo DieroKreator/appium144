@@ -14,9 +14,25 @@ from selenium.webdriver.support import expected_conditions as EC
 def test_comprar():
     options = AppiumOptions()
     options.load_capabilities({
+        # # Configurações do Appium para o dispositivo físico Android
+        # "platformName": "Android",
+        # "appium:platformVersion": "13.0",
+        # "appium:deviceName": "emulator5554",
+        # "appium:deviceOrientation": "portrait",
+        # "appium:appPackage": "com.saucelabs.mydemoapp.android",
+        # "appium:appActivity": "com.saucelabs.mydemoapp.android.view.activities.SplashActivity",
+        # "appium:automationName": "UiAutomator2",
+        # "browserName": "",
+        # "appium:ensureWebviewsHavePages": True,
+        # "appium:nativeWebScreenshot": True,
+        # "appium:newCommandTimeout": 3600,
+        # "appium:connectHardwareKeyboard": True
+
+        # Configuracao para o Sauce Labs
         "platformName": "Android",
         "appium:platformVersion": "13.0",
         "appium:deviceName": "emulator5554",
+        "appium:app": "storage:filename=mda-2.2.0-25.apk",
         "appium:deviceOrientation": "portrait",
         "appium:appPackage": "com.saucelabs.mydemoapp.android",
         "appium:appActivity": "com.saucelabs.mydemoapp.android.view.activities.SplashActivity",
