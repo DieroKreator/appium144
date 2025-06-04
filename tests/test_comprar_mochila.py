@@ -46,6 +46,10 @@ def test_comprar():
     
     # Inicia o Appium Server antes de executar este teste
     driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
+
+    # Inicia o Sauce Labs Appium Driver
+    driver = webdriver.Remote("https://oauth-difarmo-6859d:43bdf5b4-9473-4911-aea3-e46fcdddaa26@ondemand.us-west-1.saucelabs.com:443/wd/hub", options=options)
+
     wait = WebDriverWait(driver, 1) # cria uma instância de espera explícita com timeout de 1 segundo
     driver.implicitly_wait(2) # configura o tempo de espera implícito para 1 segundo
 
