@@ -11,7 +11,7 @@ from selenium.webdriver.common.actions.pointer_input import PointerInput
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
  
-def test_comprar():
+def test_comprar_mochila():
     options = AppiumOptions()
     options.load_capabilities({
         # # Configurações do Appium para o dispositivo físico Android
@@ -88,3 +88,6 @@ def test_comprar():
         
     # Destroir o driver após o teste
     driver.quit()
+
+def test_comprar_camiseta():
+    # TODO: Implementar teste para comprar camiseta
