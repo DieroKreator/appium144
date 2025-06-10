@@ -60,8 +60,8 @@ def test_comprar_mochila():
     imgMochila.click()
 
     # time.sleep(1)
-    el3 = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
-    el3.click()
+    # el3 = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
+    # el3.click()
     # wait.until(EC.presence_of_element_located((
     #     AppiumBy.ID, "com.saucelabs.mydemoapp.android:id/productTV"))).click()
 
