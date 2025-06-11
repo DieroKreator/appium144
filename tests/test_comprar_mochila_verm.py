@@ -20,26 +20,27 @@ def test_comprar_camiseta():
     })
 
     driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
+    driver.implicitly_wait(2) # configura o tempo de espera implícito para 1 segundo
 
     lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
     assert lblSecao.text == "Products"
 
-    mochilaVermLabel = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Sauce Labs Backpack (red)\")"));
-    mochilaVermPrice = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.saucelabs.mydemoapp.android:id/priceTV\").instance(3)"));
+    mochilaVermLabel = driver.find_element(AppiumBy.androidUIAutomator("new UiSelector().text(\"Sauce Labs Backpack (red)\")"));
+    mochilaVermPrice = driver.find_element(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.saucelabs.mydemoapp.android:id/priceTV\").instance(3)"));
     assert mochilaVermLabel.text == "Sauce Labs Backpack (red)"
     assert mochilaVermPrice.text == "$29.99"
-    imgMochilaVerm = driver.findElement(AppiumBy.XPATH, value="(//android.widget.ImageView[@content-desc=\"Product Image\"])[4]")
+    imgMochilaVerm = driver.find_element(AppiumBy.XPATH, value="(//android.widget.ImageView[@content-desc=\"Product Image\"])[4]")
     imgMochilaVerm.click();
 
-    lblSecaoProduto = driver.findElement(AppiumBy.ACCESSIBILITY_ID, value="title");
+    lblSecaoProduto = driver.find_element(AppiumBy.ACCESSIBILITY_ID, value="title");
     assert lblSecaoProduto.text == "Sauce Labs Backpack (red)"
-    lblPrecoProduto = driver.findElement(AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV");
+    lblPrecoProduto = driver.find_element(AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV");
     assert lblPrecoProduto.text == "$29.99"
-    sltCor = driver.findElement(AppiumBy.ACCESSIBILITY_ID, value="Red color");
+    sltCor = driver.find_element(AppiumBy.ACCESSIBILITY_ID, value="Red color");
     sltCor.click();
     txtQuantidade = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/noTV")
     assert txtQuantidade.text == "1"
-    btnAddCarrinho = driver.findElement(AppiumBy.ID, value="Tap to add product to cart");
+    btnAddCarrinho = driver.find_element(AppiumBy.ID, value="Tap to add product to cart");
     btnAddCarrinho.click();
     lblQuantidadeNoCarrinho = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().className(\"android.widget.ImageView\").instance(3)")
     assert lblQuantidadeNoCarrinho.get_attribute("content-desc") == "1"
@@ -82,10 +83,6 @@ def test_comprar_camiseta():
 
     lblSecaoCheckout2 = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
     assert lblSecaoCheckout2.text == "Checkout"
-
-
-
-
 
 
     driver.quit()
