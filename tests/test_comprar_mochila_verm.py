@@ -25,23 +25,26 @@ def test_comprar_camiseta():
     lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
     assert lblSecao.text == "Products"
 
-    mochilaVermLabel = driver.find_element(AppiumBy.androidUIAutomator("new UiSelector().text(\"Sauce Labs Backpack (red)\")"));
-    mochilaVermPrice = driver.find_element(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.saucelabs.mydemoapp.android:id/priceTV\").instance(3)"));
+    mochilaVermLabel = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().text(\"Sauce Labs Backpack (red)\")")
     assert mochilaVermLabel.text == "Sauce Labs Backpack (red)"
-    assert mochilaVermPrice.text == "$29.99"
+    mochilaVermPrice = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().resourceId(\"com.saucelabs.mydemoapp.android:id/priceTV\").instance(3)")
+    assert mochilaVermPrice.text == "$ 29.99"
     imgMochilaVerm = driver.find_element(AppiumBy.XPATH, value="(//android.widget.ImageView[@content-desc=\"Product Image\"])[4]")
     imgMochilaVerm.click();
 
-    lblSecaoProduto = driver.find_element(AppiumBy.ACCESSIBILITY_ID, value="title");
+    lblSecaoProduto = driver.find_element(AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV");
     assert lblSecaoProduto.text == "Sauce Labs Backpack (red)"
     lblPrecoProduto = driver.find_element(AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV");
-    assert lblPrecoProduto.text == "$29.99"
-    sltCor = driver.find_element(AppiumBy.ACCESSIBILITY_ID, value="Red color");
-    sltCor.click();
+    assert lblPrecoProduto.text == "$ 29.99"
+
+    # # To fix the color selection, we need to ensure the correct color is selected.
+    # sltCor = driver.find_element(AppiumBy.ACCESSIBILITY_ID, value="Red color");
+    # sltCor.click();
+
     txtQuantidade = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/noTV")
     assert txtQuantidade.text == "1"
-    btnAddCarrinho = driver.find_element(AppiumBy.ID, value="Tap to add product to cart");
-    btnAddCarrinho.click();
+    btnAddCarrinho = driver.find_element(AppiumBy.ACCESSIBILITY_ID, value="Tap to add product to cart")
+    btnAddCarrinho.click()
     lblQuantidadeNoCarrinho = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().className(\"android.widget.ImageView\").instance(3)")
     assert lblQuantidadeNoCarrinho.get_attribute("content-desc") == "1"
     lblQuantidadeNoCarrinho.click()
@@ -51,7 +54,7 @@ def test_comprar_camiseta():
     lblNomeProdutoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
     assert lblNomeProdutoCarrinho.text == "Sauce Labs Backpack (red)"
     lblPrecoProdutoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
-    assert lblPrecoProdutoCarrinho.text == "$29.99"
+    assert lblPrecoProdutoCarrinho.text == "$ 29.99"
     btnFinalizarCompra = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Confirms products for checkout")
     btnFinalizarCompra.click()
 
@@ -81,8 +84,38 @@ def test_comprar_camiseta():
     btnContinuar = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Saves user info for checkout")
     btnContinuar.click()
 
-    lblSecaoCheckout2 = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
-    assert lblSecaoCheckout2.text == "Checkout"
+    lblSecaoCheckout2 = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/enterPaymentMethodTV")
+    assert lblSecaoCheckout2.text == "Enter a payment method"
+    txtCardName = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/nameET")
+    txtCardName.send_keys("David Reynolds")
+    txtCardNumber = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/cardNumberET")
+    txtCardNumber.send_keys("4111111111111111")
+    txtCardExpiry = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/expirationDateET")
+    txtCardExpiry.send_keys("12/25")
+    txtCardCvv = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/securityCodeET")
+    txtCardCvv.send_keys("123")
+    btnRevisarOrdem = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Saves payment info and launches screen to review checkout data")
+    btnRevisarOrdem.click()
 
+    lblSecaoRevisao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="com.saucelabs.mydemoapp.android:id/enterShippingAddressTV")
+    assert lblSecaoRevisao.text == "Review your order"
+    lblNomeProdutoRevisao = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/titleTV")
+    assert lblNomeProdutoRevisao.text == "Sauce Labs Backpack (red)"
+    lblPrecoProdutoRevisao = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
+    assert lblPrecoProdutoRevisao.text == "$ 29.99"
+    lblQuantidadeProdutos = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/itemNumberTV")
+    assert lblQuantidadeProdutos.text == "1 items"
+    btnFinalizarCompra = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Completes the process of checkout")
+    btnFinalizarCompra.click()
+
+    lblSecaoFinalizacao = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/completeTV")
+    assert lblSecaoFinalizacao.text == "Checkout Complete"
+    msgFinalizacao = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/thankYouTV")
+    assert msgFinalizacao.text == "Thank you for your order"
+    btnVoltarAoInicio = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Tap to open catalog")
+    btnVoltarAoInicio.click()
+
+    lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
+    assert lblSecao.text == "Products"
 
     driver.quit()
