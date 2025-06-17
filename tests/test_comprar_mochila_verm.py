@@ -6,7 +6,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-def test_comprar_camiseta():
+def test_comprar_mochila_verm():
 
     options = AppiumOptions()
     options.load_capabilities({
