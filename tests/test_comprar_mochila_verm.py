@@ -24,7 +24,7 @@ def test_comprar_mochila_verm():
     })
 
     driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
-    driver.implicitly_wait(4) # configura o tempo de espera implícito para 1 segundo
+    driver.implicitly_wait(1) # configura o tempo de espera implícito para 1 segundo
 
     lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
     assert lblSecao.text == "Products"
@@ -56,14 +56,16 @@ def test_comprar_mochila_verm():
     wait = WebDriverWait(driver, 1)
     lblQuantidadeNoCarrinho = wait.until(EC.presence_of_element_located(
            (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("com.saucelabs.mydemoapp.android:id/cartTV")')))
-
     # lblQuantidadeNoCarrinho = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().className(\"android.widget.ImageView\").instance(3)")
     # time.sleep(40)
     assert lblQuantidadeNoCarrinho.get_attribute("text") == "1"
     lblQuantidadeNoCarrinho.click()
 
-    lblSecaoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
+    lblSecaoCarrinho = wait.until(EC.presence_of_element_located(
+           (AppiumBy.ID, "com.saucelabs.mydemoapp.android:id/productTV")))
+    # lblSecaoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
     assert lblSecaoCarrinho.text == "My Cart"
+    
     lblNomeProdutoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/titleTV")
     assert lblNomeProdutoCarrinho.text == "Sauce Labs Backpack (red)"
     lblPrecoProdutoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
@@ -71,7 +73,9 @@ def test_comprar_mochila_verm():
     btnFinalizarCompra = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Confirms products for checkout")
     btnFinalizarCompra.click()
 
-    lblSecaoLogin = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/loginTV")
+    lblSecaoLogin = wait.until(EC.presence_of_element_located(
+           (AppiumBy.ID, "com.saucelabs.mydemoapp.android:id/loginTV")))
+    # lblSecaoLogin = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/loginTV")
     assert lblSecaoLogin.text == "Login"
     txtUsuario = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/nameET")
     txtUsuario.send_keys("bod@example.com")
@@ -117,7 +121,7 @@ def test_comprar_mochila_verm():
     lblPrecoProdutoRevisao = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
     assert lblPrecoProdutoRevisao.text == "$ 29.99"
     lblQuantidadeProdutos = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/itemNumberTV")
-    assert lblQuantidadeProdutos.text == "1 items"
+    assert lblQuantidadeProdutos.text == "1 Items"
     btnFinalizarCompra = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Completes the process of checkout")
     btnFinalizarCompra.click()
 
@@ -128,7 +132,9 @@ def test_comprar_mochila_verm():
     btnVoltarAoInicio = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Tap to open catalog")
     btnVoltarAoInicio.click()
 
-    lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
-    assert lblSecao.text == "Products"
+    lblSecaoCatalog = wait.until(EC.presence_of_element_located(
+        (AppiumBy.ACCESSIBILITY_ID, "title")))
+    # lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
+    assert lblSecaoCatalog.text == "Products"
 
     driver.quit()
