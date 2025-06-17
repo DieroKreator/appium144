@@ -1,6 +1,10 @@
+import time
 from appium.options.common.base import AppiumOptions
 from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
+
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 def test_comprar_camiseta():
 
@@ -32,9 +36,9 @@ def test_comprar_camiseta():
     imgMochilaVerm = driver.find_element(AppiumBy.XPATH, value="(//android.widget.ImageView[@content-desc=\"Product Image\"])[4]")
     imgMochilaVerm.click();
 
-    lblSecaoProduto = driver.find_element(AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV");
+    lblSecaoProduto = driver.find_element(AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
     assert lblSecaoProduto.text == "Sauce Labs Backpack (red)"
-    lblPrecoProduto = driver.find_element(AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV");
+    lblPrecoProduto = driver.find_element(AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
     assert lblPrecoProduto.text == "$ 29.99"
 
     # # To fix the color selection, we need to ensure the correct color is selected.
@@ -45,8 +49,17 @@ def test_comprar_camiseta():
     assert txtQuantidade.text == "1"
     btnAddCarrinho = driver.find_element(AppiumBy.ACCESSIBILITY_ID, value="Tap to add product to cart")
     btnAddCarrinho.click()
-    lblQuantidadeNoCarrinho = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().className(\"android.widget.ImageView\").instance(3)")
-    assert lblQuantidadeNoCarrinho.get_attribute("content-desc") == "1"
+
+    # wait.until(EC.presence_of_element_located(
+    #        AppiumBy.ANDROID_UIAUTOMATOR, "new UiSelector().className(\"android.widget.ImageView\").instance(3)"))
+    
+    wait = WebDriverWait(driver, 1)
+    lblQuantidadeNoCarrinho = wait.until(EC.presence_of_element_located(
+           (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("com.saucelabs.mydemoapp.android:id/cartTV")')))
+
+    # lblQuantidadeNoCarrinho = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().className(\"android.widget.ImageView\").instance(3)")
+    # time.sleep(40)
+    assert lblQuantidadeNoCarrinho.get_attribute() == "1"
     lblQuantidadeNoCarrinho.click()
 
     lblSecaoCarrinho = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
