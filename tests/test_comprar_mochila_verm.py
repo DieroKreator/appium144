@@ -62,8 +62,8 @@ def test_comprar_mochila_verm():
     assert lblQuantidadeNoCarrinho.get_attribute("text") == "1"
     lblQuantidadeNoCarrinho.click()
 
-    lblSecaoCarrinho = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
-    assert lblSecaoCarrinho.text == "Cart"
+    lblSecaoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
+    assert lblSecaoCarrinho.text == "My Cart"
     lblNomeProdutoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
     assert lblNomeProdutoCarrinho.text == "Sauce Labs Backpack (red)"
     lblPrecoProdutoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
