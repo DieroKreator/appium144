@@ -1,1 +1,56 @@
-/.venv
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# VS Code settings
+.vscode/
+
+# Environment files
+.env
+.venv/
+venv/
+ENV/
+env/
+Pipfile.lock
+poetry.lock
+
+# Test and coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+coverage.xml
+*.cover
+.cache
+.pytest_cache/
+nosetests.xml
+test-results.xml
+
+# Appium / Android logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Node-related files (if using WebDriverAgent or npm tools)
+node_modules/
+
+# Appium specific: compiled apps or APKs
+*.apk
+*.ipa
+*.app
+build/
+
+# IDEs
+.idea/
+
+# Python profiler
+profile.prof
+
+# Jupyter
+.ipynb_checkpoints/
+
+# pyenv
+.python-version
