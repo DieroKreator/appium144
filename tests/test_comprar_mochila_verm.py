@@ -64,20 +64,20 @@ def test_comprar_mochila_verm():
 
     lblSecaoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
     assert lblSecaoCarrinho.text == "My Cart"
-    lblNomeProdutoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
+    lblNomeProdutoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/titleTV")
     assert lblNomeProdutoCarrinho.text == "Sauce Labs Backpack (red)"
     lblPrecoProdutoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
     assert lblPrecoProdutoCarrinho.text == "$ 29.99"
     btnFinalizarCompra = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Confirms products for checkout")
     btnFinalizarCompra.click()
 
-    lblSecaoLogin = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
+    lblSecaoLogin = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/loginTV")
     assert lblSecaoLogin.text == "Login"
-    txtUsuario = driver.find_element(by=AppiumBy.ID, value="new UiSelector().resourceId(\"com.saucelabs.mydemoapp.android:id/nameET\")")
+    txtUsuario = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/nameET")
     txtUsuario.send_keys("bod@example.com")
-    txtSenha = driver.find_element(by=AppiumBy.ID, value="new UiSelector().resourceId(\"com.saucelabs.mydemoapp.android:id/passwordET\")")
+    txtSenha = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/passwordET")
     txtSenha.send_keys("10203040")
-    btnLogin = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Tap to login")
+    btnLogin = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Tap to login with given credentials")
     btnLogin.click()
 
     lblSecaoCheckout1 = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
