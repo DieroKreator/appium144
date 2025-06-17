@@ -80,7 +80,7 @@ def test_comprar_mochila_verm():
     btnLogin = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Tap to login with given credentials")
     btnLogin.click()
 
-    lblSecaoCheckout1 = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
+    lblSecaoCheckout1 = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/checkoutTitleTV")
     assert lblSecaoCheckout1.text == "Checkout"
     txtNome = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/fullNameET")
     txtNome.send_keys("David Reynolds")
