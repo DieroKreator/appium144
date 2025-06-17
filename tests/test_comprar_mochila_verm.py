@@ -24,7 +24,7 @@ def test_comprar_mochila_verm():
     })
 
     driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
-    driver.implicitly_wait(3) # configura o tempo de espera implícito para 1 segundo
+    driver.implicitly_wait(4) # configura o tempo de espera implícito para 1 segundo
 
     lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
     assert lblSecao.text == "Products"
@@ -110,7 +110,7 @@ def test_comprar_mochila_verm():
     btnRevisarOrdem = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="Saves payment info and launches screen to review checkout data")
     btnRevisarOrdem.click()
 
-    lblSecaoRevisao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="com.saucelabs.mydemoapp.android:id/enterShippingAddressTV")
+    lblSecaoRevisao = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/enterShippingAddressTV")
     assert lblSecaoRevisao.text == "Review your order"
     lblNomeProdutoRevisao = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/titleTV")
     assert lblNomeProdutoRevisao.text == "Sauce Labs Backpack (red)"
