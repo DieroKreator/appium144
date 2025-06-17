@@ -59,7 +59,7 @@ def test_comprar_mochila_verm():
 
     # lblQuantidadeNoCarrinho = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().className(\"android.widget.ImageView\").instance(3)")
     # time.sleep(40)
-    assert lblQuantidadeNoCarrinho.get_attribute() == "1"
+    assert lblQuantidadeNoCarrinho.get_attribute("text") == "1"
     lblQuantidadeNoCarrinho.click()
 
     lblSecaoCarrinho = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
