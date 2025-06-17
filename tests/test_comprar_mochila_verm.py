@@ -31,17 +31,14 @@ def test_comprar_mochila_verm():
            (AppiumBy.XPATH, "//android.widget.TextView[@content-desc='title']")))
     # lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
     assert lblSecao.text == "Products"
-
     mochilaVermLabel = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().text(\"Sauce Labs Backpack (red)\")")
     assert mochilaVermLabel.text == "Sauce Labs Backpack (red)"
     mochilaVermPrice = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().resourceId(\"com.saucelabs.mydemoapp.android:id/priceTV\").instance(3)")
     assert mochilaVermPrice.text == "$ 29.99"
     imgMochilaVerm = driver.find_element(AppiumBy.XPATH, value="(//android.widget.ImageView[@content-desc=\"Product Image\"])[4]")
     imgMochilaVerm.click();
-
     lblSecaoProduto = wait.until(EC.presence_of_element_located(
            (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("com.saucelabs.mydemoapp.android:id/productTV")')))
-    # lblSecaoProduto = driver.find_element(AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
     assert lblSecaoProduto.text == "Sauce Labs Backpack (red)"
     lblPrecoProduto = driver.find_element(AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
     assert lblPrecoProduto.text == "$ 29.99"
@@ -54,22 +51,14 @@ def test_comprar_mochila_verm():
     assert txtQuantidade.text == "1"
     btnAddCarrinho = driver.find_element(AppiumBy.ACCESSIBILITY_ID, value="Tap to add product to cart")
     btnAddCarrinho.click()
-
-    # wait.until(EC.presence_of_element_located(
-    #        AppiumBy.ANDROID_UIAUTOMATOR, "new UiSelector().className(\"android.widget.ImageView\").instance(3)"))
-    
     lblQuantidadeNoCarrinho = wait.until(EC.presence_of_element_located(
            (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("com.saucelabs.mydemoapp.android:id/cartTV")')))
-    # lblQuantidadeNoCarrinho = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().className(\"android.widget.ImageView\").instance(3)")
-    # time.sleep(40)
     assert lblQuantidadeNoCarrinho.get_attribute("text") == "1"
     lblQuantidadeNoCarrinho.click()
 
     lblSecaoCarrinho = wait.until(EC.presence_of_element_located(
            (AppiumBy.ID, "com.saucelabs.mydemoapp.android:id/productTV")))
-    # lblSecaoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
     assert lblSecaoCarrinho.text == "My Cart"
-    
     lblNomeProdutoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/titleTV")
     assert lblNomeProdutoCarrinho.text == "Sauce Labs Backpack (red)"
     lblPrecoProdutoCarrinho = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
@@ -79,7 +68,6 @@ def test_comprar_mochila_verm():
 
     lblSecaoLogin = wait.until(EC.presence_of_element_located(
            (AppiumBy.XPATH, '//android.widget.TextView[@resource-id="com.saucelabs.mydemoapp.android:id/loginTV"]')))
-    # lblSecaoLogin = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/loginTV")
     assert lblSecaoLogin.text == "Login"
     txtUsuario = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/nameET")
     txtUsuario.send_keys("bod@example.com")
@@ -138,7 +126,6 @@ def test_comprar_mochila_verm():
 
     lblSecaoCatalog = wait.until(EC.presence_of_element_located(
            (AppiumBy.XPATH, "//android.widget.TextView[@content-desc='title']")))
-    # lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
     assert lblSecaoCatalog.text == "Products"
 
     driver.quit()
