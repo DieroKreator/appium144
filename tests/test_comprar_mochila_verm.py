@@ -24,9 +24,12 @@ def test_comprar_mochila_verm():
     })
 
     driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
-    driver.implicitly_wait(1) # configura o tempo de espera implícito para 1 segundo
+    driver.implicitly_wait(2) # configura o tempo de espera implícito para 1 segundo
+    wait = WebDriverWait(driver, 1)
 
-    lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
+    lblSecao = wait.until(EC.presence_of_element_located(
+           (AppiumBy.XPATH, "//android.widget.TextView[@content-desc='title']")))
+    # lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
     assert lblSecao.text == "Products"
 
     mochilaVermLabel = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().text(\"Sauce Labs Backpack (red)\")")
@@ -36,7 +39,9 @@ def test_comprar_mochila_verm():
     imgMochilaVerm = driver.find_element(AppiumBy.XPATH, value="(//android.widget.ImageView[@content-desc=\"Product Image\"])[4]")
     imgMochilaVerm.click();
 
-    lblSecaoProduto = driver.find_element(AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
+    lblSecaoProduto = wait.until(EC.presence_of_element_located(
+           (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("com.saucelabs.mydemoapp.android:id/productTV")')))
+    # lblSecaoProduto = driver.find_element(AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/productTV")
     assert lblSecaoProduto.text == "Sauce Labs Backpack (red)"
     lblPrecoProduto = driver.find_element(AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/priceTV")
     assert lblPrecoProduto.text == "$ 29.99"
@@ -53,7 +58,6 @@ def test_comprar_mochila_verm():
     # wait.until(EC.presence_of_element_located(
     #        AppiumBy.ANDROID_UIAUTOMATOR, "new UiSelector().className(\"android.widget.ImageView\").instance(3)"))
     
-    wait = WebDriverWait(driver, 1)
     lblQuantidadeNoCarrinho = wait.until(EC.presence_of_element_located(
            (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("com.saucelabs.mydemoapp.android:id/cartTV")')))
     # lblQuantidadeNoCarrinho = driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value="new UiSelector().className(\"android.widget.ImageView\").instance(3)")
@@ -74,7 +78,7 @@ def test_comprar_mochila_verm():
     btnFinalizarCompra.click()
 
     lblSecaoLogin = wait.until(EC.presence_of_element_located(
-           (AppiumBy.ID, "com.saucelabs.mydemoapp.android:id/loginTV")))
+           (AppiumBy.XPATH, '//android.widget.TextView[@resource-id="com.saucelabs.mydemoapp.android:id/loginTV"]')))
     # lblSecaoLogin = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/loginTV")
     assert lblSecaoLogin.text == "Login"
     txtUsuario = driver.find_element(by=AppiumBy.ID, value="com.saucelabs.mydemoapp.android:id/nameET")
@@ -133,7 +137,7 @@ def test_comprar_mochila_verm():
     btnVoltarAoInicio.click()
 
     lblSecaoCatalog = wait.until(EC.presence_of_element_located(
-        (AppiumBy.ACCESSIBILITY_ID, "title")))
+           (AppiumBy.XPATH, "//android.widget.TextView[@content-desc='title']")))
     # lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
     assert lblSecaoCatalog.text == "Products"
 
