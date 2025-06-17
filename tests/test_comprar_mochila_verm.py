@@ -24,7 +24,7 @@ def test_comprar_mochila_verm():
     })
 
     driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
-    driver.implicitly_wait(2) # configura o tempo de espera implícito para 1 segundo
+    driver.implicitly_wait(3) # configura o tempo de espera implícito para 1 segundo
 
     lblSecao = driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="title")
     assert lblSecao.text == "Products"
